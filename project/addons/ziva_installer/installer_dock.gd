@@ -173,7 +173,7 @@ func _on_state_changed(state_str: String, progress: float) -> void:
 			_install_button.visible = false
 			_progress_bar.visible = true
 			_progress_bar.value = progress * 100.0
-			_status_label.text = "Downloading... %d%%" % int(progress * 100.0)
+			_status_label.text = "Downloading..."
 		"extracting":
 			_state = State.EXTRACTING
 			_progress_bar.visible = true

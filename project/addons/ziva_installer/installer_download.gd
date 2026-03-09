@@ -88,13 +88,16 @@ func _extract_zip() -> void:
 
 	var files := reader.get_files()
 	for file_path in files:
+		# Zip already contains paths like "addons/ziva_agent/..."
+		if not file_path.begins_with("addons/ziva_agent/"):
+			continue
+
 		if file_path.ends_with("/"):
-			# Directory entry, create directory
-			DirAccess.make_dir_recursive_absolute("res://addons/ziva_agent/" + file_path)
+			DirAccess.make_dir_recursive_absolute("res://" + file_path)
 			continue
 
 		var data := reader.read_file(file_path)
-		var dest := "res://addons/ziva_agent/" + file_path
+		var dest := "res://" + file_path
 		var dir_path := dest.get_base_dir()
 		DirAccess.make_dir_recursive_absolute(dir_path)
 
