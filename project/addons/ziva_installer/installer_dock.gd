@@ -99,9 +99,9 @@ func _build_ui() -> void:
 	_restart_button.pressed.connect(_on_restart_pressed)
 	add_child(_restart_button)
 
-	# Spacer
+	# Expanding spacer to push ToS to bottom
 	var spacer3 := Control.new()
-	spacer3.custom_minimum_size.y = 8
+	spacer3.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	add_child(spacer3)
 
 	# ToS link
@@ -173,7 +173,7 @@ func _on_state_changed(state_str: String, progress: float) -> void:
 			_install_button.visible = false
 			_progress_bar.visible = true
 			_progress_bar.value = progress * 100.0
-			_status_label.text = "Downloading..."
+			_status_label.text = ""
 		"extracting":
 			_state = State.EXTRACTING
 			_progress_bar.visible = true
