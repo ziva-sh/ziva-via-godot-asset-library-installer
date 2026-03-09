@@ -1,0 +1,58 @@
+# Godot auto generated files
+*.gen.*
+.godot/
+
+# Compiled binaries are ignored via project/addons/ziva_installer/bin/.gitignore
+.sconsign*.dblite
+
+# Ignore custom.py
+custom.py
+
+# Ignore generated compile_commands.json
+compile_commands.json
+
+# Ignore files generated for documentation
+/src/gen
+
+# Binaries
+*.o
+*.os
+*.so
+*.obj
+*.bc
+*.pyc
+*.dblite
+*.pdb
+*.lib
+*.config
+*.creator
+*.creator.user
+*.files
+*.includes
+*.idb
+*.exp
+
+# Installed Ziva Agent plugin (downloaded by installer)
+project/addons/ziva_agent/
+
+# UID files
+*.uid
+
+# Temp and logs
+/tmp/
+*.log
+
+# VSCode
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+
+# Jetbrains
+.idea/
+
+# Python cache
+__pycache__/
+
+# Cmake
+cmake-build*
+CMakeUserPresets.json
