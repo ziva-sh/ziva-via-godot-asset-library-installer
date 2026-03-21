@@ -6,10 +6,10 @@ reloadable = false
 
 [libraries]
 ; Relative paths ensure that our GDExtension can be placed anywhere in the project directory.
-macos.single.debug = "bin/libziva_installer.macos.debug.framework/ziva_installer.macos.debug"
-macos.single.release = "bin/libziva_installer.macos.release.framework/ziva_installer.macos.release"
-macos.double.debug = "bin/libziva_installer.macos.debug.framework/ziva_installer.macos.debug"
-macos.double.release = "bin/libziva_installer.macos.release.framework/ziva_installer.macos.release"
+macos.single.debug = "bin/libziva_installer.macos.debug.framework/libziva_installer.macos.debug"
+macos.single.release = "bin/libziva_installer.macos.release.framework/libziva_installer.macos.release"
+macos.double.debug = "bin/libziva_installer.macos.debug.framework/libziva_installer.macos.debug"
+macos.double.release = "bin/libziva_installer.macos.release.framework/libziva_installer.macos.release"
 
 ios.arm64.single.debug = "bin/libziva_installer.ios.debug.arm64.dylib"
 ios.arm64.double.debug = "bin/libziva_installer.ios.debug.arm64.dylib"
