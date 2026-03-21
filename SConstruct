@@ -29,7 +29,7 @@ env.Append(CPPPATH=["src/"])
 sources = Glob("src/*.cpp")
 
 # Auto-discover the .gdextension path and output binaries to the addon's bin/ folder
-(extension_path,) = glob("project/addons/*/*.gdextension")
+(extension_path,) = glob("addons/*/*.gdextension")
 addon_path = Path(extension_path).parent
 project_name = Path(extension_path).stem
 

@@ -80,7 +80,7 @@ jobs:
         if: ${{ matrix.target.platform == 'windows' }}
         shell: pwsh
         run: |
-          Remove-Item project/addons/ziva_installer/bin/* -Include *.exp,*.lib,*.pdb -Force
+          Remove-Item addons/ziva_installer/bin/* -Include *.exp,*.lib,*.pdb -Force
 
       # Upload the build
       - name: Upload Artifact
@@ -88,7 +88,7 @@ jobs:
         with:
           name: ziva-installer-${{ matrix.target.platform }}-${{ matrix.target.arch }}-${{ matrix.float-precision }}-${{ matrix.target-type }}
           path: |
-            ${{ github.workspace }}/project/addons/ziva_installer/bin/**
+            ${{ github.workspace }}/addons/ziva_installer/bin/**
 
   # Merges all the build artifacts together into a single ziva-installer artifact.
   # If you comment out this step, all the builds will be uploaded individually.

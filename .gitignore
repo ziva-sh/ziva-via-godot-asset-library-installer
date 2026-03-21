@@ -2,7 +2,7 @@
 *.gen.*
 .godot/
 
-# Compiled binaries are ignored via project/addons/ziva_installer/bin/.gitignore
+# Compiled binaries are ignored via addons/ziva_installer/bin/.gitignore
 .sconsign*.dblite
 
 # Ignore custom.py
@@ -33,7 +33,7 @@ compile_commands.json
 *.exp
 
 # Installed Ziva Agent plugin (downloaded by installer)
-project/addons/ziva_agent/
+addons/ziva_agent/
 
 # UID files
 *.uid

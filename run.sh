@@ -17,4 +17,4 @@ fi
 mkdir -p /tmp/ziva-installer-logs
 echo "Starting Godot editor with Ziva Installer plugin..."
 echo "Logs: /tmp/ziva-installer-logs/godot.log"
-godot -e --path "$SCRIPT_DIR/project" > /tmp/ziva-installer-logs/godot.log 2>&1
+godot -e --path "$SCRIPT_DIR" > /tmp/ziva-installer-logs/godot.log 2>&1
