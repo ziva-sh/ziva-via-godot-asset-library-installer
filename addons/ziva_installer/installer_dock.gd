@@ -113,7 +113,8 @@ func _build_ui() -> void:
 
 
 func _create_downloader() -> void:
-	var script := load("res://addons/ziva_installer/installer_download.gd")
+	var base_dir := get_script().resource_path.get_base_dir()
+	var script := load(base_dir + "/installer_download.gd")
 	if script == null:
 		push_error("ZivaInstaller: Could not load installer_download.gd")
 		return
