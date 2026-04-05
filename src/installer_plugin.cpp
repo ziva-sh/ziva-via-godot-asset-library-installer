@@ -1,14 +1,52 @@
 #include "installer_plugin.h"
-#include "register_types.h"
 
+#include <godot_cpp/classes/dir_access.hpp>
 #include <godot_cpp/classes/editor_interface.hpp>
 #include <godot_cpp/classes/file_access.hpp>
+#include <godot_cpp/classes/gd_extension_manager.hpp>
 #include <godot_cpp/classes/os.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/script.hpp>
 #include <godot_cpp/classes/v_box_container.hpp>
 
 void InstallerPlugin::_bind_methods() {}
+
+String InstallerPlugin::_get_base_dir() const {
+	// Try GDExtensionManager first — returns res:// paths of loaded .gdextension files.
+	GDExtensionManager *manager = GDExtensionManager::get_singleton();
+	if (manager) {
+		PackedStringArray extensions = manager->get_loaded_extensions();
+		for (int i = 0; i < extensions.size(); i++) {
+			if (extensions[i].contains("ziva_installer")) {
+				return extensions[i].get_base_dir();
+			}
+		}
+	}
+
+	// Fallback: scan addons/ for any directory containing our .gdextension file.
+	// Handles renamed folders (e.g. "ziva-installer-v0.1.6 (1) - Copy").
+	Ref<DirAccess> dir = DirAccess::open("res://addons");
+	if (dir.is_valid()) {
+		dir->list_dir_begin();
+		String name = dir->get_next();
+		while (name != "") {
+			if (dir->current_is_dir()) {
+				String candidate = "res://addons/" + name;
+				if (FileAccess::file_exists(candidate + "/ziva_installer.gdextension")) {
+					return candidate;
+				}
+			}
+			name = dir->get_next();
+		}
+	}
+
+	// Last resort: check project root.
+	if (FileAccess::file_exists("res://ziva_installer/ziva_installer.gdextension")) {
+		return "res://ziva_installer";
+	}
+
+	return "res://addons/ziva_installer";
+}
 
 void InstallerPlugin::_enter_tree() {
 	// If the full Ziva Agent plugin is already installed, do nothing.
@@ -21,7 +59,7 @@ void InstallerPlugin::_enter_tree() {
 		return;
 	}
 
-	String base_dir = get_installer_base_dir();
+	String base_dir = _get_base_dir();
 
 	// Load the installer dock GDScript and attach it to a VBoxContainer.
 	Ref<Script> script = ResourceLoader::get_singleton()->load(base_dir + "/installer_dock.gd");
