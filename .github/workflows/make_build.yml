@@ -108,8 +108,8 @@ jobs:
 
   # Combines compiled binaries with plugin scripts into a release-ready ZIP
   # and publishes a GitHub release when triggered by a version tag.
-  # The ZIP contains files flat at root and is named ziva_installer.zip so that
-  # Windows "Extract All" into addons/ produces addons/ziva_installer/.
+  # The ZIP contains addons/ziva_installer/ at root so Godot's Asset Library
+  # extracts it directly into the project with the correct path.
   package:
     runs-on: ubuntu-22.04
     needs: merge
@@ -126,7 +126,7 @@ jobs:
           path: addons/ziva_installer/bin/
 
       - name: Create release ZIP
-        run: cd addons/ziva_installer && zip -r ../../ziva_installer.zip .
+        run: zip -r ziva_installer.zip addons/ziva_installer/
 
       - name: Upload Release ZIP
         uses: actions/upload-artifact@v4
