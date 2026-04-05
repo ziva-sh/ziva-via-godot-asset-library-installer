@@ -113,7 +113,22 @@ func _extract_zip() -> void:
 	# Clean up temp file
 	DirAccess.remove_absolute(_download_path)
 
+	# Godot's FileAccess creates files with 644 permissions, but CEF
+	# sub-processes (ziva_cef_helper, chrome-sandbox) need execute bits.
+	_fix_executable_permissions()
+
 	state_changed.emit("complete", 1.0)
+
+
+func _fix_executable_permissions() -> void:
+	var os_name := OS.get_name()
+	if os_name != "Linux" and os_name != "macOS":
+		return
+
+	var bin_path := ProjectSettings.globalize_path("res://addons/ziva_agent/bin")
+	var exit_code := OS.execute("chmod", ["-R", "+x", bin_path])
+	if exit_code != 0:
+		push_error("ZivaInstaller: chmod failed (exit %d) on %s" % [exit_code, bin_path])
 
 
 func _get_platform_suffix() -> String:
