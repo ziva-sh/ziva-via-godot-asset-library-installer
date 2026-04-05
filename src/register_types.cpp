@@ -10,10 +10,23 @@
 
 using namespace godot;
 
+// The native library path is resolved once at init time and used by InstallerPlugin
+// to locate sibling GDScript files regardless of install directory name.
+static String s_plugin_base_dir;
+
+const String &get_installer_base_dir() {
+	return s_plugin_base_dir;
+}
+
 void initialize_gdextension_types(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_EDITOR) {
 		return;
 	}
+
+	// Derive base dir from the native library path (e.g. res://.../bin/lib.dll → res://.../)
+	String lib_path;
+	internal::gdextension_interface_get_library_path(internal::library, &lib_path);
+	s_plugin_base_dir = lib_path.get_base_dir().get_base_dir();
 
 	ClassDB::register_internal_class<InstallerPlugin>();
 	EditorPlugins::add_by_type<InstallerPlugin>();

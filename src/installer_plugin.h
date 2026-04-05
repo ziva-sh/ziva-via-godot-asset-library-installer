@@ -19,8 +19,6 @@ public:
 	String _get_plugin_name() const override;
 
 private:
-	String _get_base_dir() const;
-
 	Control *dock_ = nullptr;
 	Node *test_api_ = nullptr;
 };

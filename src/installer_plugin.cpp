@@ -1,27 +1,14 @@
 #include "installer_plugin.h"
+#include "register_types.h"
 
 #include <godot_cpp/classes/editor_interface.hpp>
 #include <godot_cpp/classes/file_access.hpp>
-#include <godot_cpp/classes/gd_extension_manager.hpp>
 #include <godot_cpp/classes/os.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/script.hpp>
 #include <godot_cpp/classes/v_box_container.hpp>
 
 void InstallerPlugin::_bind_methods() {}
-
-String InstallerPlugin::_get_base_dir() const {
-	GDExtensionManager *manager = GDExtensionManager::get_singleton();
-	if (manager) {
-		PackedStringArray extensions = manager->get_loaded_extensions();
-		for (int i = 0; i < extensions.size(); i++) {
-			if (extensions[i].contains("ziva_installer")) {
-				return extensions[i].get_base_dir();
-			}
-		}
-	}
-	return "res://addons/ziva_installer";
-}
 
 void InstallerPlugin::_enter_tree() {
 	// If the full Ziva Agent plugin is already installed, do nothing.
@@ -34,7 +21,7 @@ void InstallerPlugin::_enter_tree() {
 		return;
 	}
 
-	String base_dir = _get_base_dir();
+	String base_dir = get_installer_base_dir();
 
 	// Load the installer dock GDScript and attach it to a VBoxContainer.
 	Ref<Script> script = ResourceLoader::get_singleton()->load(base_dir + "/installer_dock.gd");
