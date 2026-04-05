@@ -1,5 +1,6 @@
 #include "installer_plugin.h"
 
+#include <godot_cpp/classes/editor_interface.hpp>
 #include <godot_cpp/classes/file_access.hpp>
 #include <godot_cpp/classes/gd_extension_manager.hpp>
 #include <godot_cpp/classes/os.hpp>
@@ -25,6 +26,11 @@ String InstallerPlugin::_get_base_dir() const {
 void InstallerPlugin::_enter_tree() {
 	// If the full Ziva Agent plugin is already installed, do nothing.
 	if (FileAccess::file_exists("res://addons/ziva_agent/ziva_agent.gdextension")) {
+		return;
+	}
+
+	// If the GDScript plugin already added the dock, don't duplicate it.
+	if (EditorInterface::get_singleton()->get_base_control()->find_child("ZivaInstaller", true, false)) {
 		return;
 	}
 

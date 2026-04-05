@@ -99,6 +99,26 @@ jobs:
       - name: Merge Artifacts
         uses: actions/upload-artifact/merge@v4
         with:
-          name: ziva-installer
+          name: ziva-installer-binaries
           pattern: ziva-installer-*
           delete-merged: true
+
+  # Combines compiled binaries with plugin scripts into a release-ready artifact.
+  package:
+    runs-on: ubuntu-22.04
+    needs: merge
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Binaries
+        uses: actions/download-artifact@v4
+        with:
+          name: ziva-installer-binaries
+          path: addons/ziva_installer/bin/
+
+      - name: Upload Complete Plugin
+        uses: actions/upload-artifact@v4
+        with:
+          name: ziva-installer
+          path: addons/
