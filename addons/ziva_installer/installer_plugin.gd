@@ -12,7 +12,7 @@ func _enter_tree() -> void:
 	if EditorInterface.get_base_control().find_child("ZivaInstaller", true, false):
 		return
 
-	var base_dir := get_script().resource_path.get_base_dir()
+	var base_dir: String = get_script().resource_path.get_base_dir()
 	var script := load(base_dir + "/installer_dock.gd")
 	if script == null:
 		return
