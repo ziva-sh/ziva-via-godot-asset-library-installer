@@ -58,7 +58,7 @@ func _on_api_request_completed(result: int, response_code: int, _headers: Packed
 	_download_tag = data["tag_name"]
 	var suffix := _get_platform_suffix()
 	if suffix == "":
-		error_occurred.emit("Unsupported platform: " + OS.get_name() + "-" + Engine.get_architecture_name())
+		error_occurred.emit("Unsupported platform: " + OS.get_name())
 		return
 
 	var url := "https://github.com/ziva-sh/ziva-agent-plugin-godot/releases/download/%s/ziva-ai-agent-%s-godot-v4.2.0-%s.zip" % [_download_tag, _download_tag, suffix]
