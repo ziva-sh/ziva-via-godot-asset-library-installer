@@ -15,8 +15,8 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level) {
 		return;
 	}
 
-	ClassDB::register_internal_class<InstallerPlugin>();
-	EditorPlugins::add_by_type<InstallerPlugin>();
+	ClassDB::register_internal_class<ZivaInstallerPlugin>();
+	EditorPlugins::add_by_type<ZivaInstallerPlugin>();
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {
