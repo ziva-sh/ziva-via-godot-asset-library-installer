@@ -79,7 +79,7 @@ func _build_ui() -> void:
 
 	# Subtext 
 	var subtext_label := Label.new()
-	subtext_label.text = "By installing you agree to the Terms of service and privacy policy"
+	subtext_label.text = "By installing you agree to the Terms of Service and Privacy Policy"
 	subtext_label.add_theme_font_size_override("font_size", _scale_editor_font_size(0.85))
 	subtext_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	subtext_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

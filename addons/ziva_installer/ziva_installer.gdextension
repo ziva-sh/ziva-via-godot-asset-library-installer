@@ -16,6 +16,11 @@ windows.x86_64.single.release = "bin/libziva_installer.windows.release.x86_64.dl
 windows.x86_64.double.debug = "bin/libziva_installer.windows.debug.x86_64.dll"
 windows.x86_64.double.release = "bin/libziva_installer.windows.release.x86_64.dll"
 
+windows.arm64.single.debug = "bin/libziva_installer.windows.debug.arm64.dll"
+windows.arm64.single.release = "bin/libziva_installer.windows.release.arm64.dll"
+windows.arm64.double.debug = "bin/libziva_installer.windows.debug.arm64.dll"
+windows.arm64.double.release = "bin/libziva_installer.windows.release.arm64.dll"
+
 linux.x86_64.single.debug = "bin/libziva_installer.linux.debug.x86_64.so"
 linux.x86_64.single.release = "bin/libziva_installer.linux.release.x86_64.so"
 linux.x86_64.double.debug = "bin/libziva_installer.linux.debug.x86_64.so"
