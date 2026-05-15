@@ -2,7 +2,6 @@
 *.gen.*
 .godot/
 
-# Compiled binaries are ignored via addons/ziva_installer/bin/.gitignore
 .sconsign*.dblite
 
 # Ignore custom.py
@@ -18,6 +17,10 @@ compile_commands.json
 *.o
 *.os
 *.so
+*.dll
+*.dylib
+*.wasm
+*.framework/
 *.obj
 *.bc
 *.pyc
