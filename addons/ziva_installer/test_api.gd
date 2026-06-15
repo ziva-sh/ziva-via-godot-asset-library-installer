@@ -108,7 +108,9 @@ func _get_state_response() -> String:
 
 	var state: String = _dock.get_state()
 	var progress: float = _dock.get_progress()
-	return _http_response(200, '{"state": "%s", "progress": %s}' % [state, str(progress)])
+	var retry_count: int = _dock.get_retry_count()
+	var error_message: String = _dock.get_error_message()
+	return _http_response(200, '{"state": "%s", "progress": %s, "retry_count": %d, "error_message": %s}' % [state, str(progress), retry_count, JSON.stringify(error_message)])
 
 
 func _get_screenshot_response() -> String:

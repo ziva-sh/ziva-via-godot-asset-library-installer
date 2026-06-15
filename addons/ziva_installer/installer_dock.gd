@@ -5,6 +5,7 @@ enum State { IDLE, DOWNLOADING, EXTRACTING, COMPLETE, ERROR }
 
 var _state: State = State.IDLE
 var _progress: float = 0.0
+var _error_message: String = ""
 
 var _links_row: HBoxContainer
 var _install_button: Button
@@ -195,6 +196,16 @@ func get_progress() -> float:
 	return _progress
 
 
+func get_retry_count() -> int:
+	if _downloader:
+		return _downloader.get_retry_count()
+	return 0
+
+
+func get_error_message() -> String:
+	return _error_message
+
+
 func start_install() -> void:
 	if _downloader:
 		_downloader.start_install()
@@ -226,6 +237,12 @@ func _on_state_changed(state_str: String, progress: float) -> void:
 			_progress_bar.visible = true
 			_progress_bar.value = progress * 100.0
 			_status_label.text = ""
+		"retrying":
+			_state = State.DOWNLOADING
+			_install_button.visible = false
+			_progress_bar.visible = true
+			_progress_bar.value = progress * 100.0
+			_status_label.text = "Retrying… (%d/3)" % get_retry_count()
 		"extracting":
 			_state = State.EXTRACTING
 			_progress_bar.visible = true
@@ -239,6 +256,7 @@ func _on_state_changed(state_str: String, progress: float) -> void:
 
 
 func _on_error_occurred(message: String) -> void:
+	_error_message = message
 	_state = State.ERROR
 	_progress_bar.visible = false
 	_install_button.visible = false

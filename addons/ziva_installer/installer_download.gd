@@ -4,10 +4,13 @@ extends Node
 signal state_changed(state: String, progress: float)
 signal error_occurred(message: String)
 
+const MAX_API_RETRIES := 3
+
 var _http_api: HTTPRequest
 var _http_download: HTTPRequest
 var _download_tag: String = ""
 var _download_path: String = ""
+var _api_retries := 0
 
 
 func _ready() -> void:
@@ -20,10 +23,27 @@ func _ready() -> void:
 	add_child(_http_download)
 
 
+func get_retry_count() -> int:
+	return _api_retries
+
+
+func _api_url() -> String:
+	if OS.has_environment("ZIVA_INSTALLER_API_URL"):
+		var override := OS.get_environment("ZIVA_INSTALLER_API_URL")
+		print("ZivaInstaller: Using API URL override: " + override)
+		return override
+	return "https://api.github.com/repos/ziva-sh/ziva-agent-plugin-godot/releases/latest"
+
+
 func start_install() -> void:
+	_api_retries = 0
 	state_changed.emit("downloading", 0.0)
+	_request_api()
+
+
+func _request_api() -> void:
 	var err := _http_api.request(
-		"https://api.github.com/repos/ziva-sh/ziva-agent-plugin-godot/releases/latest",
+		_api_url(),
 		["Accept: application/vnd.github+json", "User-Agent: ZivaInstaller"]
 	)
 	if err != OK:
@@ -41,6 +61,18 @@ func _process(_delta: float) -> void:
 
 func _on_api_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	if result != HTTPRequest.RESULT_SUCCESS or response_code != 200:
+		var transient := result != HTTPRequest.RESULT_SUCCESS or response_code >= 500 or response_code == 429 or response_code == 0
+		if transient and _api_retries < MAX_API_RETRIES:
+			_api_retries += 1
+			state_changed.emit("retrying", 0.0)
+			await get_tree().create_timer(pow(2, _api_retries - 1)).timeout
+			if not is_inside_tree():
+				return
+			_request_api()
+			return
+		if response_code >= 500:
+			error_occurred.emit("GitHub is temporarily unavailable (HTTP %d). Please click Retry in a moment." % response_code)
+			return
 		error_occurred.emit("GitHub API request failed (code: %d, result: %d)" % [response_code, result])
 		return
 
