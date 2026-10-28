@@ -3,7 +3,6 @@
 #include <godot_cpp/classes/dir_access.hpp>
 #include <godot_cpp/classes/editor_interface.hpp>
 #include <godot_cpp/classes/file_access.hpp>
-#include <godot_cpp/classes/gd_extension_manager.hpp>
 #include <godot_cpp/classes/os.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/script.hpp>
@@ -12,18 +11,6 @@
 void ZivaInstallerPlugin::_bind_methods() {}
 
 String ZivaInstallerPlugin::_get_base_dir() const {
-	// Try GDExtensionManager first — returns res:// paths of loaded .gdextension files.
-	GDExtensionManager *manager = GDExtensionManager::get_singleton();
-	if (manager) {
-		PackedStringArray extensions = manager->get_loaded_extensions();
-		for (int i = 0; i < extensions.size(); i++) {
-			if (extensions[i].contains("ziva_installer")) {
-				return extensions[i].get_base_dir();
-			}
-		}
-	}
-
-	// Fallback: scan addons/ for any directory containing our .gdextension file.
 	// Handles renamed folders (e.g. "ziva-installer-v0.1.6 (1) - Copy").
 	Ref<DirAccess> dir = DirAccess::open("res://addons");
 	if (dir.is_valid()) {
