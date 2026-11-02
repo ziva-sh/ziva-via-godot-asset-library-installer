@@ -1,8 +1,10 @@
 ![Ziva Installer](_media/installer.png)
 
-# Ziva AI Agent Installer
+# Ziva.sh Installer for Godot
 
-This is a Godot plugin that installs [Ziva](https://ziva.sh), an AI agent for Godot. It's designed for ease of integration with the [Godot Asset Library](https://godotengine.org/asset-library/asset). While you can download Ziva with this plugin, it's recommended to get Ziva from https://ziva.sh/download
+Ziva.sh is an AI assistant built into the Godot editor. It creates and edits scenes, nodes, and scripts; reads editor errors and output, runs tests, and fixes failures; and playtests games with real keyboard and mouse input.
+
+Download the installer for your platform at https://ziva.sh/download.
 
 
 ### Installation
