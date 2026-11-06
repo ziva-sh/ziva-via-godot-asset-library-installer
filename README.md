@@ -27,6 +27,6 @@ For any help join the discord server: [Ziva Discord](https://ziva.sh/discord)
 
 ### License
 
-This installer is released under the [MIT](LICENSE.md). That license covers only the installer
+This installer is released under the [MIT License](LICENSE.md). That license covers only the installer
 in this repository. Ziva itself, which the installer downloads, is proprietary software of Zivash,
 Inc. and is not open source; use is governed by the [terms of service](https://ziva.sh/terms).
