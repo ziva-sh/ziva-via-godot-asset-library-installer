@@ -1,32 +1,38 @@
 ![Ziva Installer](_media/installer.png)
 
-# Ziva.sh Installer for Godot
+# Ziva Installer for the Godot Asset Library
 
-Ziva.sh is an AI assistant built into the Godot editor. It creates and edits scenes, nodes, and scripts; reads editor errors and output, runs tests, and fixes failures; and playtests games with real keyboard and mouse input.
+This is the source of the "Ziva Installer" editor plugin, the Ziva entry on the Godot Asset Library (asset 4879, https://godotengine.org/asset-library/asset/4879). It adds a dock to the Godot editor that downloads Ziva into your project's `addons/ziva_agent` folder. Ziva is an AI agent that runs inside the Godot editor, made by Zivash Inc. (https://ziva.sh).
 
-Download the installer for your platform at https://ziva.sh/download.
+## Use it
 
+1. Open your project in Godot 4.2 or later.
+2. Click the AssetLib tab.
+3. Search for `Ziva Installer`.
+4. Click it, then click `Download`.
+5. The installer dock appears on the left side. Click `Install Ziva AI Agent`.
+6. When it says the installation is complete, restart the editor.
 
-### Installation
+The dock downloads the latest Ziva plugin zip for your platform from https://github.com/ziva-sh/ziva-agent-plugin-godot/releases. If `res://addons/ziva_agent` already exists, the dock does not appear.
 
-1. Open Godot
+To uninstall, close Godot, delete the `addons/ziva_agent` and `addons/ziva_installer` folders, and reopen the project.
 
-2. Click on the AssetLib tab
+Other ways to install Ziva (the Ziva installer app or the manual zip): https://ziva.sh/docs/installation
 
-3. Search for `Ziva Installer`
+## What it installs
 
-4. Click it and click `Download`
+Ziva works in the Godot editor. It reads your project files, inspects the scene tree, checks editor errors, edits scenes and scripts, runs the game to check its work and fixes the errors it finds.
 
-5. You should see the installer Dock on the left side
+- Requirements: Godot 4.2 or later; Windows, macOS 13 or newer, or Linux; an internet connection for AI features.
+- Plans: Hobby is free, Basic is $20/month, Pro is $50/month and Ultra is $200/month. Parallel mode and the Playtest Agent are on Pro and Ultra, in Godot only; Parallel mode uses much more plan usage than a normal chat. Details: https://ziva.sh/pricing
+- Full feature list: https://github.com/ziva-sh/ziva-agent-plugin-godot#readme
+- Documentation: https://ziva.sh/docs
 
-6. Click on `Install Ziva AI Agent`
+## License
 
-Note: If Ziva AI Agent is already installed (res://addons/ziva_agent) the installer dock will not appear.
+This installer is released under the MIT License (LICENSE.md). That license covers only the installer in this repository. Ziva itself, which the installer downloads, is proprietary software of Zivash, Inc. and is not open source; use is governed by the terms of service at https://ziva.sh/terms.
 
-For any help join the discord server: [Ziva Discord](https://ziva.sh/discord)
+## Support
 
-### License
-
-This installer is released under the [MIT License](LICENSE.md). That license covers only the installer
-in this repository. Ziva itself, which the installer downloads, is proprietary software of Zivash,
-Inc. and is not open source; use is governed by the [terms of service](https://ziva.sh/terms).
+- Bug reports: https://github.com/ziva-sh/ziva-agent-plugin-godot/issues
+- Discord: https://ziva.sh/discord
