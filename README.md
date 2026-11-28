@@ -25,6 +25,7 @@ Ziva works in the Godot editor. It reads your project files, inspects the scene 
 
 - Requirements: Godot 4.2 or later; Windows, macOS 13 or newer, or Linux; an internet connection for AI features.
 - Plans: Hobby is free, Basic is $20/month, Pro is $50/month and Ultra is $200/month. Parallel mode and the Playtest Agent are on Pro and Ultra, in Godot only; Parallel mode uses much more plan usage than a normal chat. Details: https://ziva.sh/pricing
+- Use your own Claude Pro/Max or ChatGPT Plus/Pro subscription inside Godot: sign in from Ziva's settings, no API key needed, on every plan including free Hobby (https://ziva.sh/docs/existing-subscriptions).
 - Full feature list: https://github.com/ziva-sh/ziva-agent-plugin-godot#readme
 - Documentation: https://ziva.sh/docs
 
